@@ -1,9 +1,7 @@
-.table {
-    background-color:white;
-    border-radius:5px;
+.table{
+	background-color: white;
 }
 
-body {
-  background-image: url(../img/retina_wood.png);
-    /*background-color:#e8e8e8;*/
+.logo a {
+  color: rgba(0,0,0,.9);
 }

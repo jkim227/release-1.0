@@ -1,19 +1,9 @@
-from django.test import TestCase
-
-# Create your tests here.
 from django.contrib.auth.models import User
-from django.urls import reverse
+from django.urls import resolve, reverse
 from django.urls import resolve
 from django.test import TestCase
-
-'''
-from .views import signup
-from django.contrib.auth.forms import UserCreationForm
-'''
-
 from ..views import signup
 from ..forms import SignUpForm
-
 
 class SignUpTests(TestCase):
     def setUp(self):
@@ -33,7 +23,7 @@ class SignUpTests(TestCase):
     def test_contains_form(self):
         form = self.response.context.get('form')
         self.assertIsInstance(form, SignUpForm)
-        
+
     def test_form_inputs(self):
         '''
         The view must contain five inputs: csrf, username, email,
@@ -44,8 +34,6 @@ class SignUpTests(TestCase):
         self.assertContains(self.response, 'type="email"', 1)
         self.assertContains(self.response, 'type="password"', 2)
 
-        
-        
 class SuccessfulSignUpTests(TestCase):
     def setUp(self):
         url = reverse('signup')
@@ -57,7 +45,6 @@ class SuccessfulSignUpTests(TestCase):
         }
         self.response = self.client.post(url, data)
         self.home_url = reverse('home')
-
 
     def test_redirection(self):
         '''
@@ -77,7 +64,7 @@ class SuccessfulSignUpTests(TestCase):
         response = self.client.get(self.home_url)
         user = response.context.get('user')
         self.assertTrue(user.is_authenticated)
-        
+
 class InvalidSignUpTests(TestCase):
     def setUp(self):
         url = reverse('signup')
@@ -95,4 +82,3 @@ class InvalidSignUpTests(TestCase):
 
     def test_dont_create_user(self):
         self.assertFalse(User.objects.exists())
-        

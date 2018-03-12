@@ -1,8 +1,8 @@
+from django.contrib.auth import views as auth_views
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
-from django.contrib.auth import views as auth_views
-from django.urls import resolve, reverse
 from django.test import TestCase
+from django.urls import resolve, reverse
 
 class LoginRequiredPasswordChangeTests(TestCase):
     def test_redirection(self):
@@ -10,14 +10,14 @@ class LoginRequiredPasswordChangeTests(TestCase):
         login_url = reverse('login')
         response = self.client.get(url)
         self.assertRedirects(response, f'{login_url}?next={url}')
-        
+
 class PasswordChangeTestCase(TestCase):
     def setUp(self, data={}):
         self.user = User.objects.create_user(username='john', email='john@doe.com', password='old_password')
         self.url = reverse('password_change')
         self.client.login(username='john', password='old_password')
         self.response = self.client.post(self.url, data)
-        
+
 class SuccessfulPasswordChangeTests(PasswordChangeTestCase):
     def setUp(self):
         super().setUp({
@@ -48,7 +48,8 @@ class SuccessfulPasswordChangeTests(PasswordChangeTestCase):
         response = self.client.get(reverse('home'))
         user = response.context.get('user')
         self.assertTrue(user.is_authenticated)
-        
+
+
 class InvalidPasswordChangeTests(PasswordChangeTestCase):
     def test_status_code(self):
         '''
