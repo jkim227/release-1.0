@@ -1,0 +1,9 @@
+.table {
+    background-color:white;
+    border-radius:5px;
+}
+
+body {
+  background-image: url(../img/retina_wood.png);
+    /*background-color:#e8e8e8;*/
+}
