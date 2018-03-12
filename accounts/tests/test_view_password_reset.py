@@ -14,8 +14,9 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.forms import SetPasswordForm
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
-from django.urls import resolve
+from django.core import mail
+from django.contrib.auth.forms import PasswordResetForm
+from django.urls import reverse, resolve
 from django.test import TestCase
 
 class PasswordResetCompleteTests(TestCase):
