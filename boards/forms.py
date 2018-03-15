@@ -1,20 +1,15 @@
 from django import forms
-from .models import Topic, Post
+from .models import Topic
 
 class NewTopicForm(forms.ModelForm):
     message = forms.CharField(
         widget=forms.Textarea(
-            attrs={'rows': 5, 'placeholder': 'Please provide contact info (i.e. email, phone number)\nSpecify details of Space (i.e. Cost Rate: $/month)'}
+            attrs={'rows': 5, 'placeholder': 'What is on your mind?'}
         ),
-        max_length=5000,
-        help_text='The max length of the text is 5000.'
+        max_length=4000,
+        help_text='The max length of the text is 4000.'
     )
 
     class Meta:
         model = Topic
         fields = ['subject', 'message']
-
-class PostForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        fields = ['message', ]
